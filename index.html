@@ -187,7 +187,7 @@ pre code {
 <pre class="r"><code># This is a so-called &quot;R chunk&quot; where you can write R code.
 
 date()</code></pre>
-<pre><code>## [1] &quot;Tue Nov 02 14:38:13 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Nov 15 12:16:41 2021&quot;</code></pre>
 <p>The text continues here.</p>
 <hr />
 </div>
@@ -200,8 +200,22 @@ date()</code></pre>
 <li>Assume the reader has no previous knowledge of your data or the more advanced methods you are using.</li>
 </ul>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Tue Nov 02 14:38:13 2021&quot;</code></pre>
-<p>Here we go again…</p>
+<pre><code>## [1] &quot;Mon Nov 15 12:16:41 2021&quot;</code></pre>
+<p>1.The dataset has 166 objects and 7 variables( (gender, age, attitude, deep, strategic, surf and points)</p>
+<ol start="2" style="list-style-type: decimal">
+<li>well, mostly the points seem to rise with more attitude. We could from this data say that they might be correlating Here we go again…</li>
+</ol>
+<p>3Call: lm(formula = points ~ attitude + stra + surf, data = learning2014)</p>
+<p>Residuals: Min 1Q Median 3Q Max -25.151 -3.212 2.233 5.257 13.694</p>
+<p>Coefficients: Estimate Std. Error t value Pr(&gt;|t|)<br />
+(Intercept) 4.7781 5.1577 0.926 0.3555<br />
+attitude 3.7570 0.8308 4.522 1.11e-05 **<em> stra 1.8968 0.7832 2.422 0.0164 </em><br />
+surf -0.6262 1.1494 -0.545 0.5866<br />
+— Signif. codes: 0 ‘<em><strong>’ 0.001 ‘</strong>’ 0.01 ‘</em>’ 0.05 ‘.’ 0.1 ‘ ’ 1</p>
+<p>Residual standard error: 8.082 on 179 degrees of freedom Multiple R-squared: 0.146, Adjusted R-squared: 0.1317 F-statistic: 10.2 on 3 and 179 DF, p-value: 3.089e-06</p>
+<p>str(C) dim(C) install.packages(‘ggplot2’) colnames(learning2014)[2] &lt;- “age” colnames(learning2014)[7] &lt;- “points” colnames(learning2014)</p>
+<p>p1 &lt;- ggplot(learning2014, aes(x = attitude, y = points)) p2 &lt;- p1 + geom_point() p2 p3 &lt;- p2 + geom_smooth(method = “lm”) p4 &lt;- p3 + ggtitle(“Student’s attitude versus exam points”) p4 install.packages(‘GGally’)</p>
+<p>p &lt;- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap(“facethist”, bins = 20))) p ggpairs(learning2014, lower = list(combo = wrap(“facethist”, bins = 20))) my_model2 &lt;- lm(points ~ attitude + stra + surf, data = learning2014) summary(my_model2) my_model2 &lt;- lm(points ~ attitude + stra, data = learning2014) par(mfrow = c(2,2)) plot(my_model2, which = c(1,2,5))</p>
 <hr />
 <p>(more chapters to be added similarly as we proceed with the course!)</p>
 </div>
