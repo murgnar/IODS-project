@@ -7,7 +7,56 @@
 - Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
 
 ```{r}
+C <- read.delim("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt", sep=",", header=TRUE)
+str(C)
+dim(C)
+install.packages('ggplot2')
+colnames(learning2014)[2] <- "age"
+colnames(learning2014)[7] <- "points"
+colnames(learning2014)
+library(ggplot2)
+p1 <- ggplot(learning2014, aes(x = attitude, y = points))
+p2 <- p1 + geom_point()
+p2
+p3 <- p2 + geom_smooth(method = "lm")
+p4 <- p3 + ggtitle("Student's attitude versus exam points")
+p4
+install.packages('GGally')
+library(GGally)
+library(ggplot2)
+p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+p
+ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
+my_model2 <- lm(points ~ attitude + stra + surf, data = learning2014)
+summary(my_model2)
+my_model2 <- lm(points ~ attitude + stra, data = learning2014)
+par(mfrow = c(2,2))
+plot(my_model2, which = c(1,2,5))
 date()
 ```
+1.The dataset has 166 objects and 7 variables( (gender, age, attitude, deep, strategic, surf and points)
 
+2. well, mostly the points seem to rise with more attitude. We could from this data say that they might be correlating
 Here we go again...
+
+3Call:
+lm(formula = points ~ attitude + stra + surf, data = learning2014)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-25.151  -3.212   2.233   5.257  13.694 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   4.7781     5.1577   0.926   0.3555    
+attitude      3.7570     0.8308   4.522 1.11e-05 ***
+stra          1.8968     0.7832   2.422   0.0164 *  
+surf         -0.6262     1.1494  -0.545   0.5866    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.082 on 179 degrees of freedom
+Multiple R-squared:  0.146,	Adjusted R-squared:  0.1317 
+F-statistic:  10.2 on 3 and 179 DF,  p-value: 3.089e-06
+
+
